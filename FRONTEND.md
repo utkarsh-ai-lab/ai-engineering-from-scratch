@@ -20,6 +20,18 @@ npx serve -s site -l 3000
 # open http://localhost:3000
 ```
 
+Alternatively, use the repository helper script `start-frontend.ps1` from the repo root:
+
+```powershell
+.\start-frontend.ps1
+```
+
+Or open the browser automatically:
+
+```powershell
+.\start-frontend.ps1 -Open
+```
+
 3. Quick health check (PowerShell):
 
 ```powershell
