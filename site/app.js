@@ -240,7 +240,9 @@
       html += '<div class="modal-lesson' + (userComplete ? ' user-done' : '') + '">';
       html += '<span class="modal-lesson-status ' + statusClass + '"' + (userComplete ? ' title="You completed this lesson"' : '') + '></span>';
       if (l.url) {
-        html += '<a href="' + l.url + '" target="_blank" rel="noopener">' + escapeHtml(l.name) + '</a>';
+        var lessonLink = lessonPath ? 'lesson.html?path=' + encodeURIComponent(lessonPath) : l.url;
+        var targetAttr = lessonPath ? '' : ' target="_blank" rel="noopener"';
+        html += '<a href="' + lessonLink + '"' + targetAttr + '>' + escapeHtml(l.name) + '</a>';
       } else {
         html += '<a>' + escapeHtml(l.name) + '</a>';
       }
@@ -249,7 +251,7 @@
 
       var actionHtml = '';
       if ((l.status === 'complete' || userComplete) && lessonPath) {
-        actionHtml = '<a href="lesson.html?path=' + lessonPath + '" class="modal-lesson-read">' + (userComplete ? 'Review' : 'Read') + '</a>';
+        actionHtml = '<a href="lesson.html?path=' + encodeURIComponent(lessonPath) + '" class="modal-lesson-read">' + (userComplete ? 'Review' : 'Read') + '</a>';
       }
       var toggleHtml = '';
       if (hasProgress && lessonPath) {
@@ -260,6 +262,13 @@
     }
 
     container.innerHTML = html;
+
+    var lessonLinks = container.querySelectorAll('.modal-lesson a');
+    for (var lnk = 0; lnk < lessonLinks.length; lnk++) {
+      lessonLinks[lnk].addEventListener('click', function (e) {
+        e.stopPropagation();
+      });
+    }
 
     var toggles = container.querySelectorAll('.modal-lesson-toggle');
     for (var t = 0; t < toggles.length; t++) {
