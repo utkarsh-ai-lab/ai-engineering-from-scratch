@@ -33,8 +33,8 @@ Common task-to-dataset mapping:
 
 | Task | Starter Dataset | HF ID |
 |------|----------------|-------|
-| Text classification | Rotten Tomatoes | `rotten_tomatoes` |
-| Sentiment analysis | IMDB | `imdb` |
+| Text classification | Rotten Tomatoes | `cornell-movie-review-data/rotten_tomatoes` |
+| Sentiment analysis | IMDB | `stanfordnlp/imdb` |
 | Natural language inference | MNLI | `glue/mnli` |
 | Question answering | SQuAD | `squad` |
 | Summarization | CNN/DailyMail | `cnn_dailymail` |

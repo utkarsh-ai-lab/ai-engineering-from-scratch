@@ -45,19 +45,21 @@ pip install datasets huggingface_hub
 ```python
 from datasets import load_dataset
 
-dataset = load_dataset("imdb")
+dataset = load_dataset("stanfordnlp/imdb")
 print(dataset)
 print(dataset["train"][0])
 ```
+
+Use the full Hub id (`namespace/name`). Short legacy names like `imdb` no longer work with current `huggingface_hub` releases.
 
 This downloads the IMDB movie review dataset. After the first download, it loads from cache at `~/.cache/huggingface/datasets/`.
 
 ### Step 3: Stream large datasets
 
-Some datasets are too large to fit on disk. Streaming loads them row by row without downloading the full thing.
+Some datasets are too large to fit on disk. Streaming loads them row by row without downloading the full thing. Wikipedia configs are dated snapshots (for example `20231101.en`); if a config name fails, list available configs on the [dataset card](https://huggingface.co/datasets/wikimedia/wikipedia).
 
 ```python
-dataset = load_dataset("wikimedia/wikipedia", "20220301.en", split="train", streaming=True)
+dataset = load_dataset("wikimedia/wikipedia", "20231101.en", split="train", streaming=True)
 
 for i, example in enumerate(dataset):
     print(example["title"])
@@ -72,7 +74,7 @@ Streaming gives you an `IterableDataset`. You process rows as they arrive. Memor
 The `datasets` library uses Apache Arrow under the hood. You can convert to other formats depending on what your pipeline needs.
 
 ```python
-dataset = load_dataset("imdb", split="train")
+dataset = load_dataset("stanfordnlp/imdb", split="train")
 
 dataset.to_csv("imdb_train.csv")
 dataset.to_json("imdb_train.json")
@@ -101,7 +103,7 @@ Every ML project needs three splits:
 Some datasets come pre-split. When they don't, split them yourself:
 
 ```python
-dataset = load_dataset("imdb", split="train")
+dataset = load_dataset("stanfordnlp/imdb", split="train")
 
 split = dataset.train_test_split(test_size=0.2, seed=42)
 train_val = split["train"].train_test_split(test_size=0.125, seed=42)
