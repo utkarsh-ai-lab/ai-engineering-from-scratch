@@ -41,20 +41,25 @@ Thumbs.db
 .vscode/
 *.log
 
+# Model weights and large datasets (do not commit to git)
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.onnx
+*.h5
 data/
-imdb_train.csv
-imdb_train.json
-imdb_train.parquet
+data/*.parquet
+data/*.csv
 models/
 checkpoints/
 wandb/
 mlruns/
-*.pt
-*.pth
-*.onnx
-*.safetensors
-*.bin
-*.h5
+
+# Local dataset exports (personal practice)
+imdb_train.csv
+imdb_train.json
+imdb_train.parquet
 .gstack/
 
 .link-cache.json
